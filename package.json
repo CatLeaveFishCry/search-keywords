@@ -15,5 +15,9 @@
     "name": "vanxizzz",
     "email": "1050132079@qq.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CatLeaveFishCry/search-keywords"
+  },
   "license": "MIT"
 }
