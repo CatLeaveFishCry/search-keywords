@@ -1,0 +1,19 @@
+{
+  "name": "search-keywords",
+  "version": "1.0.0",
+  "description": "search the keywords from target path",
+  "main": "index.js",
+  "keywords": [
+    "key",
+    "keyword",
+    "keywords",
+    "search",
+    "search-keywords",
+    "search-keyword"
+  ],
+  "author": {
+    "name": "vanxizzz",
+    "email": "1050132079@qq.com"
+  },
+  "license": "MIT"
+}
