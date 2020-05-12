@@ -19,5 +19,8 @@
     "type": "git",
     "url": "https://github.com/CatLeaveFishCry/search-keywords"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "search-keywords": "^1.0.1"
+  }
 }

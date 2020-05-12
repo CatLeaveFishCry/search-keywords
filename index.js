@@ -48,7 +48,7 @@ function _search(result, { keyword, pathArr, filename, validSuffix, exclude }) {
     };
 }
 
-function searchKeyowrds({ keywords, pathArr = ["./"], emitFile = true, filename = "./_keywords.json", validSuffix = [".js", ".jsx"], exclude = ["./node_modules"] }) {
+function searchKeyowrds({ keywords, pathArr = ["./"], emitFile = true, filename = "./_keywords.json", validSuffix = [".js", ".jsx"], exclude = ["./node_modules", "./LICENSE"] }) {
     const result = {};
     if (typeof keywords === "string") {
         keywords = [keywords]

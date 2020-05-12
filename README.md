@@ -6,15 +6,13 @@
 
 ## 例子
 ```js
-searchKeyowrds({
-    keywords : ["getMovies","setData"],
-    pathArr : ["./src"],
-    emitFile : true,
-    filename : "./_keywords.json",
-    validSuffix : [".js", ".jsx"],
-    exclude : ["./node_modules"]
+const searchKeywords = require("search-keywords");
+
+searchKeywords({
+    keywords: "search"
 })
 
+👇👇👇👇👇结果👇👇👇👇👇
 _keywords.json内容：
 {
     关键字1：{
@@ -25,7 +23,7 @@ _keywords.json内容：
 }
 
 {
-    "getMovies": {
+    "search": {
         "./src/abc/a.js": [
             4,//第4行
             7 //第7行
@@ -34,14 +32,6 @@ _keywords.json内容：
             1,
             10
         ]
-    },
-    "setData": {
-        "./src/abc/a.js": [
-            2
-        ],
-        "./src/abc/b.js": [
-            5
-        ]
     }
 }
 ```
@@ -49,10 +39,10 @@ _keywords.json内容：
 ## 详细参数
 |参数名|参数描述|参数类型|参数默认值|是否必传|
 |:---:|:---:|:---:|:---:|:---:|
-|keywords|查询的关键字|string、array|无|是|
+|keywords|查询的关键字（多个用数组）|string、array|无|是|
 |pathArr|查询的目录|array|"./"|否|
-|emitFile|输出关键字信息的文件|boolean|true|否|
-|filename|输出的文件名|string|"./_keywords.json"|否|
+|emitFile|是否输出关键字的文件|boolean|true|否|
+|filename|输出关键字的文件名|string|"./_keywords.json"|否|
 |validSuffix|查询的有效文件后缀|array|[".js", ".jsx"]|否|
-|exclude|排除的目录或文件|array|["./node_modules"]|否|
+|exclude|排除的目录或文件|array|["./node_modules","./LICENSE"]|否|
 
