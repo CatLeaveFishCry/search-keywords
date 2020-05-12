@@ -1,6 +1,6 @@
 {
   "name": "search-keywords",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "search the keywords from target path",
   "main": "index.js",
   "keywords": [
