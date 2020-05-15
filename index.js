@@ -32,7 +32,7 @@ function _search(result, { keyword, pathArr, filename, validSuffix, exclude }) {
                 _search(result, { keyword, pathArr: [`${path}/${file}`], filename, validSuffix, exclude });
             } else if (fileNameInfo.isValidSuffix) {
                 const data = fs.readFileSync(pathname);
-                const lines = data.toString().split("\r\n")
+                const lines = data.toString().split("\n")
                 result[keyword][pathname] = [];
                 for (let i = 0; i < lines.length; i++) {
                     const reg = new RegExp(keyword);
