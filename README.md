@@ -46,16 +46,6 @@
 
 ```
 ## 例子
-### 一、
-```js
-const {searchKeywords} = require("search-keywords");
-
-searchKeywords({
-    keywords: "search"
-})
-```
-
-### 二、脚本形式
 1. 根目录下创建search.js，复制下边search.js代码
 **search.js内容👇👇**
 ```js
@@ -86,7 +76,10 @@ npm run search keywords=script,require,config
 yarn search keywords=script
 yarn search keywords=script,require,config
 ```
-4. 查看_keywords.json文件内容
+4. 
+> 查看控制台输出内容，可ctrl+点击直接跳到路径下
+> 或
+> 查看_keywords.json文件内容
 
 
 ## 详细参数
@@ -97,5 +90,6 @@ yarn search keywords=script,require,config
 |emitFile|是否输出关键字的文件|boolean|true|否|
 |filename|输出关键字的文件名|string|"./_keywords.json"|否|
 |validSuffix|查询的有效文件后缀|array|[".js", ".jsx"]|否|
-|exclude|排除的目录或文件|array|["./node_modules", "./LICENSE", "./dist", "./out"]|否|
+|excludeFile|排除的文件或目录路径（相对路径）|array|[]|否|
+|excludeKeywords|排除含有有关键字的文件名或目录名|array|["node_modules", "LICENSE", "dist", "out",".git"]|否|
 

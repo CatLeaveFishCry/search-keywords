@@ -5,19 +5,28 @@ const getFileInfo = require("./utils/getFileInfo")
  * @param {*} result search-keywords最终返回值的对象
  * @param {*} config 一些配置
  */
-function searchCore(result, { keyword, pathArr, filename, validSuffix, exclude }) {
+function searchCore(result, { keyword, pathArr, filename, validSuffix, excludeFile, excludeKeywords }) {
+    console.log("测试")
     for (let path of pathArr) {
+        if (shouldFilter(path, excludeKeywords)) {
+            continue;
+        }
         const files = fs.readdirSync(path);
         path = path.replace(/\/$/, "");
         for (let file of files) {
-            const fileNameInfo = getFileInfo(file, validSuffix);
-            const pathname = `${path}/${file}`
+            if (shouldFilter(file, excludeKeywords)) {
+                continue;
+            }
+            const pathname = `${path}/${file}`;
+            const fileNameInfo = getFileInfo(file, pathname, validSuffix);
 
-            if (exclude.includes(path) || exclude.includes(pathname)) {
+            console.log(pathname, fileNameInfo);
+            console.log("==============")
+            if (excludeFile.includes(path) || excludeFile.includes(pathname)) {
                 continue;
             }
             if (fileNameInfo.isDir) {
-                searchCore(result, { keyword, pathArr: [`${path}/${file}`], filename, validSuffix, exclude });
+                searchCore(result, { keyword, pathArr: [`${path}/${file}`], filename, validSuffix, excludeFile, excludeKeywords });
             } else if (fileNameInfo.isValidSuffix) {
                 const data = fs.readFileSync(pathname);
                 const lines = data.toString().split("\n")
@@ -34,6 +43,16 @@ function searchCore(result, { keyword, pathArr, filename, validSuffix, exclude }
             }
         };
     };
+}
+
+
+function shouldFilter(pathName, excludeKeywords) {
+    for (let keywords of excludeKeywords) {
+        if (pathName.indexOf(keywords) !== -1) {
+            return true;
+        }
+    };
+    return false;
 }
 
 module.exports = searchCore;
