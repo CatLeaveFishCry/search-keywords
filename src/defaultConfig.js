@@ -8,8 +8,8 @@ const defaultConfig = {
     emitFile: true,
     filename: "./_keywords.json",
     validSuffix: [".js", ".jsx"],
-    excludeFile: ["./node_modules", "./LICENSE", "./dist", "./out"],
-    excludeKeywords: ["node_modules", "LICENSE"]
+    excludeFile: [],
+    excludeKeywords: ["node_modules", "LICENSE", "dist", "out", ".git"]
 }
 
 
