@@ -3,8 +3,6 @@ const { defaultConfig } = require("./defaultConfig");
 const { EMPTY_KEYWORDS } = require("./defaultConfig");
 const mergeConfig = require("./utils/mergeConfig")
 const searchCore = require("./core");
-console.log("测试")
-console.log(searchCore)
 /**
  * 
  * @param {*} userConfig 

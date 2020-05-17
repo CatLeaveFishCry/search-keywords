@@ -6,7 +6,6 @@ const getFileInfo = require("./utils/getFileInfo")
  * @param {*} config 一些配置
  */
 function searchCore(result, { keyword, pathArr, filename, validSuffix, excludeFile, excludeKeywords }) {
-    console.log("测试")
     for (let path of pathArr) {
         if (shouldFilter(path, excludeKeywords)) {
             continue;
@@ -20,8 +19,6 @@ function searchCore(result, { keyword, pathArr, filename, validSuffix, excludeFi
             const pathname = `${path}/${file}`;
             const fileNameInfo = getFileInfo(file, pathname, validSuffix);
 
-            console.log(pathname, fileNameInfo);
-            console.log("==============")
             if (excludeFile.includes(path) || excludeFile.includes(pathname)) {
                 continue;
             }
