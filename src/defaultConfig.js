@@ -4,12 +4,10 @@ const EMPTY_KEYWORDS = Symbol("empty-keywords");
 
 //默认配置
 const defaultConfig = {
-    pathArr: ["./"],
     emitFile: true,
     filename: "./_keywords.json",
-    validSuffix: [".js", ".jsx"],
-    excludeFile: [],
-    excludeKeywords: ["node_modules", "LICENSE", "dist", "out", ".git"]
+    validExts: [".js", ".jsx"],
+    excludeKeywords: ["node_modules", "LICENSE", "dist", "out"]
 }
 
 

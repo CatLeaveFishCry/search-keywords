@@ -1,2 +1,1 @@
-exports.searchKeywords = require("./src/searchKeywords");
-exports.scriptSearch = require("./src/scriptSearch");
+module.exports = require("./src/scriptSearch");
