@@ -1,5 +1,7 @@
 const fsPromise = require("fs").promises;
-const path = require("path")
+const path = require("path");
+const pAll = require("p-all")
+let num = 0;
 class File {
     constructor(filename, name, ext, isFile, size, createTime, updateTime) {
         this.filename = filename;
@@ -21,14 +23,16 @@ class File {
         return data;
     }
     async getChildren() {
-        const childrenArr = [];
+        num++;
+        let childrenArr = [];
         if (!this.isFile) {
             const files = await fsPromise.readdir(this.filename);
-            for (let file of files) {
-                const fileObject = await File.create(path.resolve(this.filename, file));
-                childrenArr.push(fileObject);
-            };
+            let proAll = files.map(it => {
+                return () => File.create(path.resolve(this.filename, it))
+            })
+            childrenArr = await pAll(proAll, { concurrency: 300 });
         };
+        // console.log(`嘀嘀嘀${num}次`)
         return childrenArr;
     }
     static async create(filename) {

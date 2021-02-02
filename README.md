@@ -1,25 +1,30 @@
 # search-keywords
 
+## 文档锚链接
+##### [1. 该库用来干什么？](#oo)
+##### [2. 输出内容简单介绍](#aa)
+##### [3. 配置描述](#bb)
+##### [4. Installation安装](#cc)
+##### [5. Usage使用案例](#dd)
 
-## 功能描述
-___
-由于作者记忆力不是很好，经常忘记自己写的函数或变量都用在了哪个文件，只记得它的名字，一个个去找很麻烦，所以写了该脚本来提高**开发效率**，只支持**向下搜索**，所以最好在**根目录**下执行该脚本文件
+## <span id=oo>1. 该库用来干什么？</span>
+##### 1.作用：极速查找目标关键字存在于哪些文件中
+##### 2.速度：中小型项目测试是0-1秒左右
+##### 3.适合文件：文本文件，如.txt , .c , .js , .html等等...，不适合二进制文件如.excel, .exe, .jpg等等...
 
-## _keywords.json文件内容解释
-___
+
+## <span id=aa>2. 输出内容简单介绍</span>
 ```js
-👇👇_keywords.json内容👇👇
-
 {
     关键字1：{
-        路径1：[
-            第1行,
-            第7行
+        文件路径1：[
+            该文件路径的第1行,
+            该文件路径的第7行
             ...
         ],
-        路径2：[
-            第5行,
-            第34行
+        文件路径2：[
+            该文件路径的第5行,
+            该文件路径的第34行
             ...
         ],
     },
@@ -28,8 +33,7 @@ ___
     }
 }
 
-👇👇例子👇👇
-
+例子↓↓↓
 {
   console: {
     'F:\\abc\\npm\\temp\\src\\scriptSearch.js': [ 
@@ -43,50 +47,47 @@ ___
 }
 
 ```
-## 过程
-___
-1. 根目录下创建search.js，复制下边search.js代码
-**search.js内容👇👇**
+## <span id=bb>3. 配置描述</span>
+##### 主配置
+| 参数名 | 数据类型 |  必填|默认值  |简单描述 |举例|
+| :----:| :----:   | :----:  | :----: |  :----: |:----: |
+| rootDirPath | String|是🐢 |   | 查询的**根目录**(绝对路径) |path.resolve(__dirname)|
+| keywords | Array|是🐢 |   | 查询的关键字数组 |["console","function"]|
+| validExts | Array|否⭕ |  [".js",".jsx"] | **允许**的文件后缀 ||
+| excludeKeywords | Array|否⭕ | ["(.\*)/node_modules", "(.\*)/LICENSE", "(.*)/dist"] | **排除**的目标文件或目录，根据**path-to-regexp库**规则进行配置，也可直接传**绝对路径** |[path.resolve(__dirname,"./node_modules")]|
+| outType | String|否⭕ | console | 输出查询结果的方式，可选**console或file**，file将输出到_keywords.json |
+
+## <span id=cc>4. Installation安装</span>
+```js
+npm install search-keywords
+或者
+yarn add search-keywords
+```
+
+## <span id=dd>5. Usage使用案例</span>
+##### 1.安装库
+```js
+npm install search-keywords
+或者
+yarn add search-keywords
+```
+##### 2.创建search.js文件
+> search.js文件位置没有要求，该案例假设是在项目根目录下建立
 ```js
 const scriptSearch = require("search-keywords");
-
-//配置不需要传keywords，内部会根据命令行参数取到keywords
-const config = {
-    excludeKeywords: ["node_modules", "LICENSE", "dist"],
+const path = require("path");
+const config = {//配置
+    rootDirPath: path.resolve(__dirname),
+    keywords: ["const","require"]
 }
 
 //不传配置则使用默认配置
 scriptSearch(config);
 
 ```
-2. 设置package.json的scripts
+##### 3.通过nodejs运行search.js文件（控制台输出：查询耗时xx秒才算是查询结束）
 ```js
-"scripts": {
-    ...
-    "search": "node search.js"
-}
+node search.js
 ```
-3. 命令行传参数只支持keywords，**多个值用,逗号分割**
 
-```js
-npm run search keywords=script
-npm run search keywords=script,require,config
-或
-yarn search keywords=script
-yarn search keywords=script,require,config
-```
-4. 
-> 查看控制台输出内容，可ctrl+点击直接跳到路径下
-> 或
-> 查看_keywords.json文件内容
-
-
-## 详细参数
-___
-|参数名|参数描述|参数类型|参数默认值|是否必传|
-|:---:|:---:|:---:|:---:|:---:|
-|emitFile|是否输出关键字的文件|boolean|true|否|
-|filename|输出关键字的文件名|string|"./_keywords.json"|否|
-|validExts|查询的有效文件后缀|array|[".js", ".jsx"]|否|
-|excludeKeywords|排除含有有关键字的文件名或目录名|array|["node_modules", "LICENSE", "dist", "out"]|否|
 

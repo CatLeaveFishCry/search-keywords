@@ -1,13 +1,14 @@
 
 //判断是否没有传keywords
 const EMPTY_KEYWORDS = Symbol("empty-keywords");
-
 //默认配置
 const defaultConfig = {
-    emitFile: true,
+    keywords: false,
+    rootDirPath:false,
     filename: "./_keywords.json",
     validExts: [".js", ".jsx"],
-    excludeKeywords: ["node_modules", "LICENSE", "dist", "out"]
+    excludeKeywords: ["(.*)/node_modules", "(.*)/LICENSE", "(.*)/dist"],
+    outType: "console"//console或file
 }
 
 

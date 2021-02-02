@@ -1,6 +1,6 @@
 {
   "name": "search-keywords",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "search the keywords from target path",
   "main": "index.js",
   "keywords": [
@@ -19,5 +19,12 @@
     "type": "git",
     "url": "https://github.com/vanxizzz/search-keywords"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^14.14.22",
+    "colors": "^1.4.0",
+    "moment": "^2.29.1",
+    "p-all": "^3.0.0",
+    "path-to-regexp": "^6.2.0"
+  }
 }
