@@ -2,10 +2,6 @@ const os = require("os")
 const exists = require("./util/exists")
 const File = require("./File")
 const deepGetContent = require("./util/deepGetContent")
-// const filterValidExt = require("./util/filterValidExt")
-// const fsPromise = require("fs").promises;
-// const path = require("path")
-// const filterExcludeKeywords = require("./util/filterExcludeKeywords")
 async function searchKeywords(config) {
     try {
         const isExist = await exists(config.rootDirPath, "dir");
@@ -15,17 +11,21 @@ async function searchKeywords(config) {
         const data = await File.create(config.rootDirPath);
 
         let contentObj = await deepGetContent(data, config);
-        // contentObj = filterValidExt(contentObj, config.validExts);//过滤出含有关键后缀的
-        // contentObj = filterExcludeKeywords(contentObj, config.excludeKeywords);//排除掉exclude里的
-
-
         const result = {};
         for (let key of config.keywords) {
             result[key] = {};
         };
 
         for (let filename in contentObj) {
-            let lines = contentObj[filename].split(os.EOL);
+            if (contentObj[filename].includes("")) {
+                /* 是二进制文件 */
+                continue;
+            }
+            // let lines = contentObj[filename].split(os.EOL);
+            let lines = contentObj[filename].split("\r\n");
+            if (lines.length <= 1) {
+                lines = contentObj[filename].split("\n");
+            }
             for (let key of config.keywords) {
                 result[key][filename] = [];
                 const reg = new RegExp(key);
@@ -42,6 +42,7 @@ async function searchKeywords(config) {
 
         return result;
     } catch (error) {
+        console.log("发生错误")
         console.log(error)
     }
 };

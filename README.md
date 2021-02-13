@@ -53,7 +53,8 @@
 | :----:| :----:   | :----:  | :----: |  :----: |:----: |
 | rootDirPath | String|是🐢 |   | 查询的**根目录**(绝对路径) |path.resolve(__dirname)|
 | keywords | Array|是🐢 |   | 查询的关键字数组 |["console","function"]|
-| validExts | Array|否⭕ |  [".js",".jsx"] | **允许**的文件后缀 ||
+| validExts | Array|否⭕ |  [".js",".jsx",".vue"] | **允许**的文件后缀，**若设置了inValidExts则validExts无效** ||
+| inValidExts | Array|否⭕ |  false | 查询所有文件，除了设置的**不允许**的文件后缀，**若设置了inValidExts则validExts无效** ||
 | excludeKeywords | Array|否⭕ | ["(.\*)/node_modules", "(.\*)/LICENSE", "(.*)/dist"] | **排除**的目标文件或目录，根据**path-to-regexp库**规则进行配置，也可直接传**绝对路径** |[path.resolve(__dirname,"./node_modules")]|
 | outType | String|否⭕ | console | 输出查询结果的方式，可选**console或file**，file将输出到_keywords.json |
 
